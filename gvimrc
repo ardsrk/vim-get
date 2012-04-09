@@ -17,7 +17,7 @@ if has("gui_macvim")
 
 elseif has("gui_gtk2")
 
-  set guifont=Courier\ 10\ pitch
+  set guifont=DejaVu\ Sans\ Mono\ 10
   set guioptions-=T " remove toolbar
 
   set noerrorbells
