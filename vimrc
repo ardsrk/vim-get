@@ -32,11 +32,11 @@ endfunction
 
 if has('autocmd')
   autocmd FileType html let g:html_indent_strict=1
-  autocmd BufEnter {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,config.ru} setfiletype ruby
+  autocmd BufEnter {Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru} setfiletype ruby
   autocmd BufEnter *.j setfiletype objc
-  autocmd BufWritePre *.*,{Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,config.ru} :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.*,{Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru} :call <SID>StripTrailingWhitespaces()
   autocmd BufEnter *.yml.sample setfiletype yaml
-  autocmd BufLeave,FocusLost *.*,{Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,config.ru} :wa
+  autocmd BufLeave,FocusLost *.*,{Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile} :wa
 endif
 
 command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -71,9 +71,16 @@ nnoremap <unique> <C-h> <C-w>h
 nnoremap <unique> <C-j> <C-w>j
 nnoremap <unique> <C-k> <C-w>k
 nnoremap <unique> <C-l> <C-w>l
+nnoremap <unique> <C-Up> <C-w>Up
+nnoremap <unique> <C-Left> <C-w>Left
+nnoremap <unique> <C-Right> <C-w>Right
+nnoremap <unique> <C-Down> <C-w>Down
 
 nmap <unique> <s-tab> <c-o>
 inoremap <c-cr> <esc>A<cr>
+
+" Help
+autocmd FileType help :nmap <silent> q :q<cr>
 
 " Emacs style ctrl-a & ctrl-e in insert mode
 inoremap <c-e> <c-r>=InsCtrlE()<cr>
@@ -125,7 +132,7 @@ inoremap <C-u> <esc>gUiwea
 nnoremap S i<cr><esc><right>
 
 " Better Completion
-set completeopt=longest,preview
+set completeopt=menu,longest,preview
 
 " Toggle paste
 set pastetoggle=<F8>
@@ -173,8 +180,9 @@ noremap <leader>v :vsp<CR>
 noremap <leader>h :split<CR>
 
 " Cursor highlights ***********************************************************
-set cursorline
-"set cursorcolumn
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
 
 " Searching *******************************************************************
 set hlsearch " highlight search
@@ -313,16 +321,16 @@ autocmd BufReadPost .git/* set bufhidden=delete
 autocmd BufReadPost __Gundo_* set bufhidden=delete
 autocmd BufReadPost GoToFile set bufhidden=delete
 
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>ga :Gadd<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gco :Gcheckout<cr>
-nnoremap <leader>gci :Gcommit<cr>
-nnoremap <leader>gm :Gmove<cr>
-nnoremap <leader>gr :Gremove<cr>
-nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+nnoremap <silent> <leader>gd :Gdiff<cr>
+nnoremap <silent> <leader>gs :Gstatus<cr>
+nnoremap <silent> <leader>gw :Gwrite<cr>
+nnoremap <silent> <leader>ga :Gadd<cr>
+nnoremap <silent> <leader>gb :Gblame<cr>
+nnoremap <silent> <leader>gco :Gcheckout<cr>
+nnoremap <silent> <leader>gci :Gcommit<cr>
+nnoremap <silent> <leader>gm :Gmove<cr>
+nnoremap <silent> <leader>gr :Gremove<cr>
+nnoremap <silent> <leader>gl :Glog<cr>
 
 augroup ft_fugitive
     au!
@@ -365,7 +373,7 @@ let my_ctrlp_user_command = "" .
     \ ctrlp_filter_greps
 
 let my_ctrlp_git_command = "" .
-    \ "cd %s && git ls-files | " .
+    \ "cd %s && git ls-files && git ls-files -o | " .
     \ ctrlp_filter_greps
 
 let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command]
@@ -494,3 +502,7 @@ syntax enable
 filetype plugin on
 set ofu=syntaxcomplete#Complete
 
+" Last but not least, allow for local overrides
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
