@@ -17,3 +17,5 @@ plugins:
     git: git://github.com/tpope/vim-rvm.git
   nerdcommenter:
     git: git://github.com/scrooloose/nerdcommenter.git
+  airline:
+    git: git://github.com/bling/vim-airline.git
