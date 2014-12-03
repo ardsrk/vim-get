@@ -1,6 +1,8 @@
 plugins:
   vim-rails:
     git: git://github.com/tpope/vim-rails.git
+  nerdtree:
+    git: git://github.com/scrooloose/nerdtree.git
   ack.vim:
     git: git://github.com/mileszs/ack.vim.git
   vim-bufonly:
