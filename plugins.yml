@@ -1,22 +1,8 @@
 plugins:
   vim-rails:
     git: git://github.com/tpope/vim-rails.git
-  vim-cucumber:
-    git: git://github.com/tpope/vim-cucumber.git
-  vim-haml:
-    git: git://github.com/tpope/vim-haml.git
-  nerdtree:
-    git: git://github.com/scrooloose/nerdtree.git
   ack.vim:
     git: git://github.com/mileszs/ack.vim.git
-  tabular:
-    git: git://github.com/godlygeek/tabular.git
-  vim-fugitive:
-    git: git://github.com/tpope/vim-fugitive.git
-  snipmate.vim:
-    git: git://github.com/srushti/snipmate.vim.git
-  nerdcommenter:
-    git: git://github.com/scrooloose/nerdcommenter.git
   vim-bufonly:
     git: git://github.com/duff/vim-bufonly.git
   vim-endwise:
@@ -25,33 +11,5 @@ plugins:
     git: git://github.com/tpope/vim-surround.git
   ctrlp:
     git: git://github.com/kien/ctrlp.vim.git
-  supertab:
-    git: git://github.com/ervandew/supertab.git
   rvm.vim:
     git: git://github.com/tpope/vim-rvm.git
-  vim-unimpaired:
-    git: git://github.com/tpope/vim-unimpaired.git
-  vim-rake:
-    git: git://github.com/tpope/vim-rake.git
-  yankring:
-    git: git://github.com/vim-scripts/YankRing.vim.git
-  vim-javascript:
-    git: git://github.com/pangloss/vim-javascript.git
-  vim-ruby-refactoring:
-    git: git://github.com/ecomba/vim-ruby-refactoring.git
-  gundo:
-    git: git://github.com/nelstrom/gundo.vim.git
-  conque:
-    svn: http://conque.googlecode.com/svn/trunk/
-  delimitMate:
-    git: git://github.com/Raimondi/delimitMate.git
-  tagbar:
-    git: git://github.com/majutsushi/tagbar.git
-  vim-coffee-script:
-    git: git://github.com/vim-scripts/vim-coffee-script.git
-  repeat:
-    git: git://github.com/tpope/vim-repeat.git
-  padrino:
-    git: git://github.com/gerardc/vim-padrino.git
-  easy-motion:
-    git: git://github.com/Lokaltog/vim-easymotion.git

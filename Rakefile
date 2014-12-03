@@ -13,8 +13,8 @@ end
 
 PLUGINS_WITH_MAKE = {}
 PLUGINS_WITH_RAKE = {}
-FOLDERS = %w(colors ftdetect ftplugin indent syntax doc plugin autoload snippets macros after ruby nerdtree_plugin)
-PLUGINS_WITHOUT_RAKE = plugin_urls.keys + %w(personal cscope matchit vim-spec)
+FOLDERS = %w(colors ftplugin syntax doc plugin autoload)
+PLUGINS_WITHOUT_RAKE = plugin_urls.keys
 PLUGINS = PLUGINS_WITHOUT_RAKE + PLUGINS_WITH_RAKE.keys + PLUGINS_WITH_MAKE.keys
 DOTVIM = "#{ENV['HOME']}/.vim"
 
@@ -68,7 +68,9 @@ task :install do
     install_plugins(PLUGINS_WITH_RAKE, 'rake')
     install_plugins(PLUGINS_WITH_MAKE, 'make')
   end
+
   copy_dot_files
+  copy_theme
   in_directory('plugins') do
     PLUGINS_WITHOUT_RAKE.each do |plugin|
       if !File.directory?(plugin)
@@ -102,6 +104,10 @@ end
 def copy_dot_files
   link_if_it_doesnt_exist('vimrc')
   link_if_it_doesnt_exist('gvimrc')
+end
+
+def copy_theme
+  system("cp colors/*.vim $HOME/.vim/colors/")
 end
 
 def link_if_it_doesnt_exist(file, condition = 'f')
