@@ -15,3 +15,5 @@ plugins:
     git: git://github.com/kien/ctrlp.vim.git
   rvm.vim:
     git: git://github.com/tpope/vim-rvm.git
+  nerdcommenter:
+    git: git://github.com/scrooloose/nerdcommenter.git
