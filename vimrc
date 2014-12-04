@@ -57,10 +57,6 @@ nnoremap <unique> <C-h> <C-w>h
 nnoremap <unique> <C-j> <C-w>j
 nnoremap <unique> <C-k> <C-w>k
 nnoremap <unique> <C-l> <C-w>l
-nnoremap <unique> <C-Up> <C-w>Up
-nnoremap <unique> <C-Left> <C-w>Left
-nnoremap <unique> <C-Right> <C-w>Right
-nnoremap <unique> <C-Down> <C-w>Down
 
 " Help
 autocmd FileType help :nmap <silent> q :q<cr>
@@ -159,9 +155,7 @@ endif
 autocmd FileType html set filetype=xhtml " we couldn't care less about html
 
 " Inser New Line **************************************************************
-map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
 map <Enter> o<ESC>
-set fo-=r " do not insert a comment leader after an enter, (no work, fix!!)
 
 " Sessions ********************************************************************
 " Sets what is saved when you save a session
@@ -185,8 +179,6 @@ map k gk
 " imap <up> <C-o>gk # uncomment at your own risk. it interferes with Fuf.
 map <down> gj
 map j gj
-" imap <down> <C-o>gj # same warning as the imap above.
-" map E ge
 
 " Ruby stuff ******************************************************************
 compiler ruby " Enable compiler support for ruby
@@ -296,9 +288,6 @@ if has('linux')
   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 endif
 map <leader>a :Ack!
-
-" Turbux **********************************************************************
-let g:no_turbux_mappings = 1
 
 " autocomplpop ****************************************************************
 " complete option
