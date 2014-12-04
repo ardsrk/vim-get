@@ -3,11 +3,14 @@
 " | (see gvimrc for gui vim settings) |
 " -----------------------------------------------------------------------------
 
+set nocompatible  " We don't want vi compatibility.
+
 let mapleader = ","
 let maplocalleader = "\\"
 set wildmenu
 set wildmode=list:longest,full
 set autowriteall
+set autoread
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-S> :call <SID>SynStack()<CR>
@@ -31,32 +34,20 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 if has('autocmd')
-  autocmd FileType html let g:html_indent_strict=1
-  autocmd BufEnter {Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru} setfiletype ruby
-  autocmd BufEnter *.j setfiletype objc
-  autocmd BufWritePre *.*,{Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru} :call <SID>StripTrailingWhitespaces()
-  autocmd BufEnter *.yml.sample setfiletype yaml
-  autocmd BufLeave,FocusLost *.*,{Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile} :wa
+  augroup buffer_filetype_autocmds
+    au!
+    autocmd FileType html let g:html_indent_strict=1
+    autocmd BufEnter {Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru,*.rabl} setfiletype ruby
+    autocmd BufEnter *.md setfiletype markdown
+    autocmd BufWritePre ?* :call <SID>StripTrailingWhitespaces()
+    autocmd BufLeave,FocusLost ?* nested :wa
+    autocmd BufReadPost #* set bufhidden=delete
+  augroup END
 endif
-
-command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
-function! QuickfixFilenames()
-  " Building a hash ensures we get each buffer only once
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(values(buffer_numbers))
-endfunction
-
-set nocompatible  " We don't want vi compatibility.
 
 " Shortcuts********************************************************************
 nmap <silent> <unique> <leader>w :wa<CR>
 nmap <silent> <unique> <leader>W :wa<CR>
-nmap <silent> <unique> <leader>x "*x
-nmap <silent> <unique> <leader>p "*p
-nmap <silent> <unique> <C-S-Down> :A<CR>
 nmap <silent> <unique> <Space> <PageDown>
 nmap <silent> <unique> <S-Space> <PageUp>
 nmap <silent> <unique> <C-S-Left> <C-o>
