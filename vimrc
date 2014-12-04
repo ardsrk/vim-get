@@ -52,11 +52,6 @@ nmap <silent> <unique> <Space> <PageDown>
 nmap <silent> <unique> <S-Space> <PageUp>
 nmap <silent> <unique> <C-S-Left> <C-o>
 nmap <silent> <unique> <C-S-Right> <C-i>
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-nmap <unique> <leader>ew :e %%
-nmap <unique> <leader>es :sp %%
-nmap <unique> <leader>ev :vsp %%
-nmap <unique> <leader>et :tabe %%
 
 nnoremap <unique> <C-h> <C-w>h
 nnoremap <unique> <C-j> <C-w>j
@@ -66,9 +61,6 @@ nnoremap <unique> <C-Up> <C-w>Up
 nnoremap <unique> <C-Left> <C-w>Left
 nnoremap <unique> <C-Right> <C-w>Right
 nnoremap <unique> <C-Down> <C-w>Down
-
-nmap <unique> <s-tab> <c-o>
-inoremap <c-cr> <esc>A<cr>
 
 " Help
 autocmd FileType help :nmap <silent> q :q<cr>
@@ -85,35 +77,14 @@ function! InsCtrlE()
 endfunction
 imap <C-a> <C-o>I
 
-" Tabs ************************************************************************
-"set sta " a <Tab> in an indent inserts 'shiftwidth' spaces
-
 " Files, backups and undo******************************************************
 " Turn backup off, since most stuff is in SVN, git anyway...
 set nobackup
 set nowb
 set noswapfile
 
-"Persistent undo
-try
-  if MySys() == "windows"
-    set undodir=C:\Windows\Temp
-  else
-    set undodir=~expand('$HOME/.vim/tmp')
-  endif
-
-  set undofile
-catch
-endtry
-
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Easy buffer navigation
-noremap <C-h>  <C-w>h
-noremap <C-j>  <C-w>j
-noremap <C-k>  <C-w>k
-noremap <C-l>  <C-w>l
 
 nnoremap <C-u> gUiw
 inoremap <C-u> <esc>gUiwea
@@ -125,21 +96,6 @@ nnoremap S i<cr><esc><right>
 " Better Completion
 set completeopt=menu,longest,preview
 
-" Toggle paste
-set pastetoggle=<F8>
-
-function! Tabstyle_tabs()
-  " Using 4 column tabs
-  set softtabstop=4
-  set shiftwidth=4
-  set tabstop=4
-  set noexpandtab
-  autocmd User Rails set softtabstop=4
-  autocmd User Rails set shiftwidth=4
-  autocmd User Rails set tabstop=4
-  autocmd User Rails set noexpandtab
-endfunction
-
 function! Tabstyle_spaces()
   " Use 2 spaces
   set softtabstop=2
@@ -148,11 +104,7 @@ function! Tabstyle_spaces()
   set expandtab
 endfunction
 
-if hostname() == "Laptop.local"
-  call Tabstyle_tabs()
-else
-  call Tabstyle_spaces()
-endif
+call Tabstyle_spaces()
 
 " Indenting *******************************************************************
 set autoindent " Automatically set the indent of a new line (local to buffer)
@@ -161,14 +113,6 @@ set smartindent " smartindent  (local to buffer)
 " Scrollbars ******************************************************************
 set sidescrolloff=2
 set numberwidth=4
-
-" Windows *********************************************************************
-set equalalways " Multiple windows, when created, are equal in size
-set splitbelow splitright
-
-"Vertical split then hop to new buffer
-noremap <leader>v :vsp<CR>
-noremap <leader>h :split<CR>
 
 " Cursor highlights ***********************************************************
 au WinLeave * set nocursorline nocursorcolumn
@@ -200,22 +144,7 @@ set linebreak " Wrap at word
 set showbreak=…
 
 " Mappings ********************************************************************
-" Professor VIM says '87% of users prefer jj over esc', jj abrams strongly disagrees
-imap jj <Esc>
-imap uu _
 imap hh =>
-imap aa @
-
-" Directories *****************************************************************
-" Setup backup location and enable
-"set backupdir=~/backup/vim
-"set backup
-
-" Set Swap directory
-"set directory=~/backup/vim/swap
-
-" Sets path to directory buffer was loaded from
-"autocmd BufEnter * lcd %:p:h
 
 " File Stuff ******************************************************************
 filetype plugin indent on
@@ -248,11 +177,6 @@ set vb t_vb= " Turn off the bell, this could be more annoying, but I'm not sure 
 " normally displayed i.e. whitespace, tabs, EOL
 nmap <unique><silent><leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
-
-" Mouse ***********************************************************************
-"set mouse=a " Enable the mouse
-"behave xterm
-"set selectmode=mouse
 
 " " Cursor Movement *************************************************************
 " " Make cursor move by visual lines instead of file lines (when wrapping)
@@ -304,34 +228,6 @@ let NERDTreeIgnore=['.class$', '\~$', '^cscope', 'tags']
 nmap <silent> <unique> <leader>s :.Rake<CR>
 nmap <silent> <unique> <leader>S :Rake<CR>
 nmap <silent> <unique> <leader>- :Rake -<CR>
-
-" Fugitive ********************************************************************
-autocmd BufReadPost fugitive://* set bufhidden=delete
-autocmd BufReadPost *.fugitiveblame set bufhidden=delete
-autocmd BufReadPost .git/* set bufhidden=delete
-autocmd BufReadPost __Gundo_* set bufhidden=delete
-autocmd BufReadPost GoToFile set bufhidden=delete
-
-nnoremap <silent> <leader>gd :Gdiff<cr>
-nnoremap <silent> <leader>gs :Gstatus<cr>
-nnoremap <silent> <leader>gw :Gwrite<cr>
-nnoremap <silent> <leader>ga :Gadd<cr>
-nnoremap <silent> <leader>gb :Gblame<cr>
-nnoremap <silent> <leader>gco :Gcheckout<cr>
-nnoremap <silent> <leader>gci :Gcommit<cr>
-nnoremap <silent> <leader>gm :Gmove<cr>
-nnoremap <silent> <leader>gr :Gremove<cr>
-nnoremap <silent> <leader>gl :Glog<cr>
-
-augroup ft_fugitive
-    au!
-
-    au BufNewFile,BufRead .git/index setlocal nolist
-augroup END
-
-" yankring*********************************************************************
-let g:yankring_history_dir = expand('$HOME/.vim/tmp')
-nnoremap <silent> <F6> :YRShow<cr>
 
 " Ctrl-P **********************************************************************
 let g:ctrlp_dont_split = 'NERD_tree_2'
@@ -395,36 +291,6 @@ let g:rbpt_colorpairs = [
     \ ]
 let g:rbpt_max = 16
 
-
-" Threesome ********************************************************************
-
-let g:threesome_leader = "-"
-
-let g:threesome_initial_mode = "grid"
-
-let g:threesome_initial_layout_grid = 1
-let g:threesome_initial_layout_loupe = 0
-let g:threesome_initial_layout_compare = 0
-let g:threesome_initial_layout_path = 0
-
-let g:threesome_initial_diff_grid = 1
-let g:threesome_initial_diff_loupe = 0
-let g:threesome_initial_diff_compare = 0
-let g:threesome_initial_diff_path = 0
-
-let g:threesome_initial_scrollbind_grid = 0
-let g:threesome_initial_scrollbind_loupe = 0
-let g:threesome_initial_scrollbind_compare = 0
-let g:threesome_initial_scrollbind_path = 0
-
-let g:threesome_wrap = "nowrap"
-
-" Gundo ***********************************************************************
-nmap <silent> <unique> <leader>u :GundoToggle<CR>
-
-" Tagbar **********************************************************************
-nmap <silent> <unique> <leader>c :TagbarToggle<CR>
-
 " Ack *************************************************************************
 if has('linux')
   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -441,34 +307,6 @@ let g:no_turbux_mappings = 1
 "set complete=.
 let g:AutoComplPop_IgnoreCaseOption = 0
 let g:AutoComplPop_BehaviorKeywordLength = 2
-
-" Unimpaired configuration ****************************************************
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" -----------------------------------------------------------------------------
-" | OS Specific |
-" | (GUI stuff goes in gvimrc) |
-" -----------------------------------------------------------------------------
-
-" Mac *************************************************************************
-if has("mac")
-endif
-
-" Windows *********************************************************************
-"if has("gui_win32")
-""
-"endif
-
-" -----------------------------------------------------------------------------
-" | Startup |
-" -----------------------------------------------------------------------------
-" Open NERDTree on start
-"autocmd VimEnter * exe 'NERDTree' | wincmd l
 
 " Add recently accessed projects menu (project plugin)
 filetype on  " Automatically detect file types.
