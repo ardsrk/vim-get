@@ -133,9 +133,6 @@ colorscheme camouflage
 
 " Status Line *****************************************************************
 set showcmd
-set ruler " Show ruler
-"set ch=2 " Make command line two lines high
-set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%d/%m/%Y-%H:%M\")}\ %{exists('g:loaded_rvm')?rvm#statusline():''}%=\ %l:%c%V\ %L\ %P
 set laststatus=2
 
 " Line Wrapping ***************************************************************
