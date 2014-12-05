@@ -102,6 +102,10 @@ endfunction
 
 call Tabstyle_spaces()
 
+" Windows *********************************************************************
+set equalalways " Multiple windows, when created, are equal in size
+set splitbelow splitright
+
 " Indenting *******************************************************************
 set autoindent " Automatically set the indent of a new line (local to buffer)
 set smartindent " smartindent  (local to buffer)
