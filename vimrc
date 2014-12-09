@@ -261,40 +261,13 @@ let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command
 nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 
-" Rainbow Parentheses *********************************************************
-
-nnoremap <leader>R :RainbowParenthesesToggle<cr>
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-
 " Ack *************************************************************************
-if has('linux')
-  let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-endif
 map <leader>a :Ack!
 
 " autocomplpop ****************************************************************
 let g:AutoComplPop_IgnoreCaseOption = 0
 let g:AutoComplPop_BehaviorKeywordLength = 2
 
-" Add recently accessed projects menu (project plugin)
 filetype on  " Automatically detect file types.
 
 " Minibuffer Explorer Settings
@@ -316,8 +289,3 @@ syntax enable
 
 filetype plugin on
 set ofu=syntaxcomplete#Complete
-
-" Last but not least, allow for local overrides
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
