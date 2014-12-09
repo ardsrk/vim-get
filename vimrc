@@ -155,7 +155,7 @@ endif
 
 autocmd FileType html set filetype=xhtml " we couldn't care less about html
 
-" Inser New Line **************************************************************
+" Insert New Line **************************************************************
 map <Enter> o<ESC>
 
 " Sessions ********************************************************************
@@ -291,10 +291,6 @@ endif
 map <leader>a :Ack!
 
 " autocomplpop ****************************************************************
-" complete option
-"set complete=.,w,b,u,t,k
-"let g:AutoComplPop_CompleteOption = '.,w,b,u,t,k'
-"set complete=.
 let g:AutoComplPop_IgnoreCaseOption = 0
 let g:AutoComplPop_BehaviorKeywordLength = 2
 
