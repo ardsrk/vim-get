@@ -37,6 +37,7 @@ if has('autocmd')
   augroup buffer_filetype_autocmds
     au!
     autocmd FileType html let g:html_indent_strict=1
+    autocmd FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
     autocmd BufEnter {Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru,*.rabl} setfiletype ruby
     autocmd BufEnter *.md setfiletype markdown
     autocmd BufWritePre ?* :call <SID>StripTrailingWhitespaces()
