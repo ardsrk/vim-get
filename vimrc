@@ -40,7 +40,6 @@ if has('autocmd')
     autocmd FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
     autocmd BufEnter {Gemfile,Rakefile,Guardfile,Capfile,Vagrantfile,Thorfile,config.ru,*.rabl} setfiletype ruby
     autocmd BufEnter *.md setfiletype markdown
-    autocmd BufWritePre ?* :call <SID>StripTrailingWhitespaces()
     autocmd BufLeave,FocusLost ?* nested :wa
     autocmd BufReadPost #* set bufhidden=delete
   augroup END
