@@ -4,29 +4,13 @@
 " -----------------------------------------------------------------------------
 
 
-" OS Specific *****************************************************************
-if has("gui_macvim")
+set guifont=DejaVu\ Sans\ Mono\ 12
+set guioptions-=T " remove toolbar
+set guioptions-=m " remove menubar
 
-  set fuoptions=maxvert,maxhorz " fullscreen options (MacVim only), resized window when changed to fullscreen
-  set fu
-  set guifont=Monaco:h11
-  set guioptions-=T " remove toolbar
-  set transparency=10
-  macmenu &File.New\ Tab key=<nop>
-  map <D-t> :CommandT<CR>
-
-elseif has("gui_gtk2")
-
-  set guifont=DejaVu\ Sans\ Mono\ 12
-  set guioptions-=T " remove toolbar
-
-  set noerrorbells
-  set visualbell
-  set t_vb=
-
-elseif has("x11")
-elseif has("gui_win32")
-end
+set noerrorbells
+set visualbell
+set t_vb=
 
 " General *********************************************************************
 set anti " Antialias font

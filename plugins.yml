@@ -21,3 +21,6 @@ plugins:
     git: git://github.com/bling/vim-airline.git
   matchit:
     git: git://github.com/vim-scripts/matchit.zip.git
+  fireplace:
+    git: git://github.com/tpope/vim-fireplace.git
+
