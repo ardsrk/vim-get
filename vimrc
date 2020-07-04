@@ -115,9 +115,9 @@ set sidescrolloff=2
 set numberwidth=4
 
 " Cursor highlights ***********************************************************
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-set cursorline cursorcolumn
+"au WinLeave * set nocursorline nocursorcolumn
+"au WinEnter * set cursorline cursorcolumn
+"set cursorline cursorcolumn
 
 " Searching *******************************************************************
 set hlsearch " highlight search
@@ -129,7 +129,7 @@ set smartcase " Ignore case when searching lowercase
 " Colors **********************************************************************
 "set t_Co=256 " 256 colors
 syntax on " syntax highlighting
-colorscheme camouflage
+colorscheme morning
 
 " Status Line *****************************************************************
 set showcmd
